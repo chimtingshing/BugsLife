@@ -44,6 +44,7 @@ public class SignUp extends javax.swing.JFrame {
     private static String userName;
     private UsersDAO usersDAO;
     private ArrayList<User> usersArrList;
+
     /**
      * Creates new form Login
      */
@@ -55,8 +56,7 @@ public class SignUp extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         //get image from link
 //        URL url = new URL("https://www.pngitem.com/pimgs/m/538-5381119_go-back-back-icon-vector-png-transparent-png.png");
 //        Image image = ImageIO.read(url);
@@ -71,8 +71,8 @@ public class SignUp extends javax.swing.JFrame {
         //scale image for logo
         scaleImage();
     }
-    
-     //Scales the image of the logo
+
+    //Scales the image of the logo
     private void scaleImage() {
         ImageIcon imageIcon = new ImageIcon("virus.png");
         Image img = imageIcon.getImage();
@@ -361,7 +361,7 @@ public class SignUp extends javax.swing.JFrame {
         String email = emailfield.getText();
         //use to check whether the account is already created or not based on username
         boolean checkAccountExist = false;
-        
+
         //loop through users arraylist
         for (int i = 0; i < usersArrList.size(); i++) {
             //if exist, break
@@ -395,11 +395,14 @@ public class SignUp extends javax.swing.JFrame {
                         try {
                             //add new entry into database
                             usersDAO.addUser(new User(id, username, password, 0));
+                            this.dispose();
+                            JOptionPane.showMessageDialog(null, "Your account has been created!");
+                            new Login();
+                            registerDone = true;
                         } catch (SQLException ex) {
                             Logger.getLogger(SignUp.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } 
-                    //if verification code input is incorrect
+                    } //if verification code input is incorrect
                     else {
                         //generate new verification code
                         verificationCode = (int) (Math.random() * (999999 - 100000 + 1) + 100000);
@@ -410,8 +413,7 @@ public class SignUp extends javax.swing.JFrame {
                         inputCode = JOptionPane.showInputDialog(null, "Verification Code You Entered was Wrong, New Code is sent to your Email, Enter Verification Code:");
                     }
                 }
-            } 
-            //if sendMail method return false
+            } //if sendMail method return false
             else {
                 //display 
                 JOptionPane.showMessageDialog(null, "Email Send Fail, Please Make Sure Email Entered is Valid!!", "Send fail", JOptionPane.PLAIN_MESSAGE);
@@ -483,9 +485,9 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
-     * 
+     *
      * @param verificationCode generated 6-digit verification code
      * @param receiverEmail email retrieved from jTextField input by user
      * @return true if email is sent successfully, false if not

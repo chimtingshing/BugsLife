@@ -20,6 +20,9 @@ public class ProjectsDAO {
      * @throws SQLException
      */
     public ProjectsDAO() throws SQLException {
+//        url = "jdbc:mysql://usjhvwoirne9qesm:mX5sqtRsCidWZSWgmWv4@boekrueabx7qaseoc2ov-mysql.services.clever-cloud.com:3306/boekrueabx7qaseoc2ov";
+//        username = "usjhvwoirne9qesm";
+//        password = "mX5sqtRsCidWZSWgmWv4";
         url = "jdbc:mysql://localhost:3306/tester";
         username = "root";
         password = "password";
@@ -127,5 +130,9 @@ public class ProjectsDAO {
         Project tempProject = new Project(id, name, noOfIssue);
 
         return tempProject;
+    }
+    
+    public void closeConnection() throws SQLException {
+        con.close();
     }
 }

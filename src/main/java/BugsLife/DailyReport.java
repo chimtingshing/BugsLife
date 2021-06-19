@@ -5,7 +5,6 @@
  */
 package BugsLife;
 
-import java.awt.Image;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
